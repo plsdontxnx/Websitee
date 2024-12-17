@@ -1,7 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "u143688490_lou", "Fujiwara000!", "u143688490_websiteee");
-
+include("connect.php");
 // Redirect to cart if cart is empty
 if (empty($_SESSION["cart"])) {
     echo '<script>alert("Your cart is empty!");</script>';
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insert the order details
     $insertOrderQuery = "INSERT INTO orders (user_id, total_price, order_details, status) VALUES (?, ?, ?, 'pending')";
-    $stmt = $con->prepare($insertOrderQuery);
+    $stmt = $conn->prepare($insertOrderQuery);
     $stmt->bind_param("ids", $userId, $totalPrice, $orderDetails);
 
     if ($stmt->execute()) {

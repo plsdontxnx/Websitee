@@ -1,4 +1,5 @@
-<?php session_start(); // Session Start at the beginning ?>
+<?php session_start(); 
+include("connect.php");?>
 
 <!DOCTYPE html>
 <html lang="en">

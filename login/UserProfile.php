@@ -89,14 +89,14 @@
         <!-- Left Side Navigation -->
         <div class="left-nav">
             <ul>
-                <li><a href="index.php#home" class="nav-link active" id="HomeLink">Home</a></li>
-                <li><a href="index.php#menu" class="nav-link" id="MenuLink">Menu</a></li>
+                <li><a href="#home" class="nav-link active" id="HomeLink">Home</a></li>
+                <li><a href="#menu" class="nav-link" id="MenuLink">Menu</a></li>
             </ul>
         </div>
 
         <!-- Logo Section -->
         <div class="logo">
-            <a href="index.php">
+            <a href="#">
                 <img src="images/cafe logo.png" alt="Cafe Logo">
                 <span><span class="go">GO</span><span class="fee">ffee</span></span>
             </a>
@@ -105,8 +105,8 @@
         <!-- Right Side Navigation -->
         <div class="right-nav">
             <ul>
-                <li><a href="index.php#about" class="nav-link" id="aboutLink">About Us</a></li>
-                <li><a href="index.php#contact" class="nav-link" id="contactLink">Contact</a></li>
+                <li><a href="#about" class="nav-link" id="aboutLink">About Us</a></li>
+                <li><a href="#contact" class="nav-link" id="contactLink">Contact</a></li>
                 <li>
                     <a href="#">
                         <img src="images/shopping-cart.png" alt="Shopping Cart">
@@ -128,11 +128,11 @@
         <form id="profileForm" method="POST" action="">
             <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" class="form-control editable-field" name="fname" id="fname" value="<?php echo htmlspecialchars($user['fName']); ?>" disabled>
+                <input type="text" class="form-control editable-field" name="fname" id="fname" value="<?php echo htmlspecialchars($user['fname']); ?>" disabled>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" class="form-control editable-field" name="lname" id="lname" value="<?php echo htmlspecialchars($user['lName']); ?>" disabled>
+                <input type="text" class="form-control editable-field" name="lname" id="lname" value="<?php echo htmlspecialchars($user['lname']); ?>" disabled>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

@@ -1,17 +1,6 @@
 <?php
 // Database connection
-$servername = "localhost"; // Your server name (e.g., localhost, or IP address)
-$username = "u143688490_lou"; // Your database username
-$password = "Fujiwara000!"; // Your database password
-$dbname = "u143688490_websiteee"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "connect.php";
 
 // Add Product Logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['productName'])) {

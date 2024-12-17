@@ -2,17 +2,9 @@
 session_start();
 
 
-$servername = "localhost"; // Your server name (e.g., localhost, or IP address)
-$username = "u143688490_lou"; // Your database username
-$password = "Fujiwara000!"; // Your database password
-$dbname = "u143688490_websiteee"; // Your database name
+include "connect.php";
 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Fetching data for the dashboard
 $totalOrdersQuery = "SELECT COUNT(*) AS total_orders FROM orders";
