@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db_connect.php'; // Include the database connection
+require_once 'connect.php'; // Include the database connection
 
 // Add to cart
 if (isset($_POST["add"])) {

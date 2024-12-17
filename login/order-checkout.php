@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "login");
+$con = mysqli_connect("localhost", "u143688490_lou", "Fujiwara000!", "u143688490_websiteee");
 
 // Redirect to cart if cart is empty
 if (empty($_SESSION["cart"])) {

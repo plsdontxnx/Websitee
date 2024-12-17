@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "login");
+$con = mysqli_connect("localhost", "u143688490_lou", "Fujiwara000!", "u143688490_websiteee");
 if (!isset($_SESSION['email'])) {
     header("Location: login.php");
     exit(); // Ensure script stops after redirection

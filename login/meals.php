@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect("localhost", "root", "", "login");
+$con = mysqli_connect("localhost", "u143688490_lou", "Fujiwara000!", "u143688490_websiteee");
 $query = "SELECT * FROM products WHERE id IN (8, 9, 10, 12) ORDER BY id ASC";
 $result = mysqli_query($con, $query);
 

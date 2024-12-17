@@ -10,7 +10,7 @@ function calculateTotal() {
     return $total;
 }
 
-$con = mysqli_connect("localhost", "root", "", "login");
+$con = mysqli_connect("localhost", "u143688490_lou", "Fujiwara000!", "u143688490_websiteee");
 
 // Handle removing an item from the cart
 if (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET["id"])) {
