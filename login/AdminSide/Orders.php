@@ -2,7 +2,7 @@
 session_start();
 
 // Database connection
-$servername = "localhost"; // Your server name (e.g., localhost, or IP address)
+$servername = "localhost"; // Your server name
 $username = "root"; // Your database username
 $password = ""; // Your database password
 $dbname = "login"; // Your database name
@@ -15,8 +15,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Handle POST request to update order status
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
+    $order_id = intval($_POST['order_id']); // Get order ID from the form
+    $status = $conn->real_escape_string($_POST['status']); // Get new status from the form
+
+    // Update the status in the orders table
+    $updateQuery = "UPDATE orders SET status = '$status' WHERE id = $order_id";
+
+    if ($conn->query($updateQuery)) {
+        echo "<script>alert('Status updated successfully!'); window.location.href='';</script>";
+    } else {
+        echo "<script>alert('Error updating status: " . $conn->error . "');</script>";
+    }
+}
+
 // Fetch customer data with total price and status
-$query = "SELECT u.id AS user_id, u.fName, u.lName, o.created_at, o.total_price, o.status
+$query = "SELECT o.id AS order_id, u.id AS user_id, u.fName, u.lName, o.created_at, o.total_price, o.status
           FROM users u
           JOIN orders o ON u.id = o.user_id
           ORDER BY o.created_at DESC";
@@ -34,9 +49,6 @@ $totalPrices = [];
 while ($row = $totalPriceResult->fetch_assoc()) {
     $totalPrices[$row['user_id']] = $row['total_price'];
 }
-
-// Close the database connection after fetching data
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +84,9 @@ $conn->close();
 <!-- Main Content -->
 <div class="main-content">
     <div class="card">
-        <div class="card-header">Customer Overview</div>
+        <div class="card-header">Orders Overview</div>
         <div class="card-body">
-            <h3>Customer Details</h3>
+            <h3>Orders Details</h3>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -88,21 +100,29 @@ $conn->close();
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
-                            <td><?php echo $row['fName'] . ' ' . $row['lName']; ?></td>
-                            <td><?php echo $row['created_at']; ?></td>
+                            <td><?php echo htmlspecialchars($row['fName'] . ' ' . $row['lName']); ?></td>
+                            <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             <td>$<?php echo number_format($totalPrices[$row['user_id']], 2); ?></td>
                             <td>
-                                <form method="POST" action="orders.php?order_id=<?php echo $row['user_id']; ?>" class="status-form-<?php echo $row['user_id']; ?>">
-                                    <select name="status" class="form-control" onchange="submitForm(<?php echo $row['user_id']; ?>)">
+                                <!-- Form for updating the status -->
+                                <form method="POST" action="">
+                                    <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                    <select name="status" class="form-control" onchange="this.form.submit();">
                                         <option value="Pending" <?php echo $row['status'] == 'Pending' ? 'selected' : ''; ?>>Pending</option>
                                         <option value="Done" <?php echo $row['status'] == 'Done' ? 'selected' : ''; ?>>Done</option>
                                     </select>
                                 </form>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm done-button" onclick="markAsDone(<?php echo $row['user_id']; ?>)" <?php echo $row['status'] == 'Done' ? 'disabled' : ''; ?>>
-                                    <?php echo $row['status'] == 'Done' ? 'Done' : 'Mark as Done'; ?>
-                                </button>
+                                <!-- Mark as Done Button -->
+                                <form method="POST" action="">
+                                    <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>">
+                                    <input type="hidden" name="status" value="Done">
+                                    <button type="submit" class="btn btn-primary btn-sm done-button" 
+                                        <?php echo $row['status'] == 'Done' ? 'disabled' : ''; ?>>
+                                        <?php echo $row['status'] == 'Done' ? 'Done' : 'Mark as Done'; ?>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -114,17 +134,5 @@ $conn->close();
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function submitForm(userId) {
-        document.querySelector(`.status-form-${userId}`).submit();
-    }
-
-    function markAsDone(userId) {
-        // Optionally handle status update through an AJAX request if needed
-        const statusForm = document.querySelector(`.status-form-${userId} select`);
-        statusForm.value = 'Done';
-        statusForm.form.submit();
-    }
-</script>
 </body>
 </html>
