@@ -1,0 +1,13 @@
+{
+    "name": "pc/projectforspencer",
+    "description": "Website",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yes"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
