@@ -1,13 +1,8 @@
 {
-    "name": "pc/projectforspencer",
-    "description": "Website",
+    "name": "lou/websitee",
+    "description": "project in webdev",
     "type": "project",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "yes"
-        }
-    ],
     "minimum-stability": "stable",
     "require": {}
 }
