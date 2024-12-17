@@ -89,14 +89,14 @@
         <!-- Left Side Navigation -->
         <div class="left-nav">
             <ul>
-                <li><a href="#home" class="nav-link active" id="HomeLink">Home</a></li>
-                <li><a href="#menu" class="nav-link" id="MenuLink">Menu</a></li>
+                <li><a href="index.php#home" class="nav-link active" id="HomeLink">Home</a></li>
+                <li><a href="index.php#menu" class="nav-link" id="MenuLink">Menu</a></li>
             </ul>
         </div>
 
         <!-- Logo Section -->
         <div class="logo">
-            <a href="#">
+            <a href="index.php">
                 <img src="images/cafe logo.png" alt="Cafe Logo">
                 <span><span class="go">GO</span><span class="fee">ffee</span></span>
             </a>
@@ -105,8 +105,8 @@
         <!-- Right Side Navigation -->
         <div class="right-nav">
             <ul>
-                <li><a href="#about" class="nav-link" id="aboutLink">About Us</a></li>
-                <li><a href="#contact" class="nav-link" id="contactLink">Contact</a></li>
+                <li><a href="index.php#about" class="nav-link" id="aboutLink">About Us</a></li>
+                <li><a href="index.php#contact" class="nav-link" id="contactLink">Contact</a></li>
                 <li>
                     <a href="#">
                         <img src="images/shopping-cart.png" alt="Shopping Cart">
