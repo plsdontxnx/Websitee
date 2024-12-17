@@ -183,97 +183,67 @@ session_start(); // Start session
 </footer>
 
 
-  <!-- JavaScript Logic for Scroll and Highlight -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const sections = document.querySelectorAll("section");
-      const navLinks = document.querySelectorAll(".nav-link");
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const orderButton = document.getElementById("orderButton");
+    const loggedIn = orderButton.dataset.loggedIn === 'true';
 
-      // Scroll effect logic
-      window.addEventListener("scroll", function () {
-        let currentScroll = window.scrollY;
+    // Scroll effect logic for highlighting the active link based on scroll
+    window.addEventListener("scroll", function () {
+      let currentScroll = window.scrollY;
 
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.offsetHeight;
-          const id = section.getAttribute("id");
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const id = section.getAttribute("id");
 
-          if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove("active"));
-            const activeLink = document.getElementById(${id}Link);
-            if (activeLink) activeLink.classList.add("active");
-          }
-        });
-      });
-
-      // Handle Order Now Button
-      const orderButton = document.getElementById("orderButton");
-      const loggedIn = orderButton.dataset.loggedIn === 'true';
-
-      orderButton.addEventListener("click", function () {
-        if (loggedIn) {
-          const menuSection = document.getElementById("menu");
-          menuSection.scrollIntoView({ behavior: "smooth" });
-        } else {
-          window.location.href = "index.php";
+        if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
+          // Remove active class from all links
+          navLinks.forEach(link => link.classList.remove("active"));
+          // Add active class to the current link
+          const activeLink = document.querySelector(`a[href="#${id}"]`);
+          if (activeLink) activeLink.classList.add("active");
         }
       });
     });
-  
-  
-    //Highlight for Navigation !important
-    document.addEventListener("DOMContentLoaded", function () {
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".nav-link");
 
-  // Highlight active link on page scroll
-  window.addEventListener("scroll", function () {
-    let currentScroll = window.scrollY;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      const sectionHeight = section.offsetHeight;
-      const id = section.getAttribute("id");
-
-      if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
-        // Remove active class from all links
+    // Handle navigation link clicks with smooth scrolling and active class toggle
+    navLinks.forEach(link => {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        // Smooth scroll to target section
+        const targetSection = document.querySelector(link.getAttribute("href"));
+        window.scrollTo({
+          top: targetSection.offsetTop - 50, // Adjust for fixed navbar
+          behavior: "smooth"
+        });
+        // Set active class on the clicked link
         navLinks.forEach(link => link.classList.remove("active"));
-        // Add active class to the current link
-        const activeLink = document.querySelector(`a[href="#${id}"]`);
-        if (activeLink) activeLink.classList.add("active");
-      }
-    });
-  });
-
-  // Add click event listener to nav links
-  navLinks.forEach(link => {
-    link.addEventListener("click", function (event) {
-      navLinks.forEach(link => link.classList.remove("active")); // Remove active class from all links
-      event.target.classList.add("active"); // Add active class to clicked link
-    });
-  });
-
-  // Set the active class on the section linked to the initial scroll position on page load
-  const initialActiveLink = window.location.hash ? window.location.hash : "#home"; // Default to home if no hash in URL
-  const initialLink = document.querySelector(`a[href="${initialActiveLink}"]`);
-  if (initialLink) {
-    initialLink.classList.add("active");
-  }
-
-  // Smooth scroll for navigation links
-  navLinks.forEach(link => {
-    link.addEventListener("click", function (event) {
-      event.preventDefault();
-      const targetSection = document.querySelector(link.getAttribute("href"));
-      window.scrollTo({
-        top: targetSection.offsetTop - 50, // Adjust for fixed navbar
-        behavior: "smooth"
+        link.classList.add("active");
       });
     });
-  });
-});
 
-  </script>
+    // Handle Order Now Button
+    orderButton.addEventListener("click", function () {
+      if (loggedIn) {
+        const menuSection = document.getElementById("menu");
+        menuSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = "index.php";
+      }
+    });
+
+    // Set the active class on the section linked to the initial scroll position on page load
+    const initialActiveLink = window.location.hash ? window.location.hash : "#home"; // Default to home if no hash in URL
+    const initialLink = document.querySelector(`a[href="${initialActiveLink}"]`);
+    if (initialLink) {
+      initialLink.classList.add("active");
+    }
+  });
+</script>
+
 
 </body>
 </html>

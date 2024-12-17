@@ -2,11 +2,11 @@
 session_start();
 
 
-// Database connection and queries
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "login"; 
+$servername = "localhost"; // Your server name (e.g., localhost, or IP address)
+$username = "u143688490_lou"; // Your database username
+$password = "Fujiwara000!"; // Your database password
+$dbname = "u143688490_websiteee"; // Your database name
+
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
