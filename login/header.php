@@ -18,14 +18,10 @@ include("connect.php"); // Include database connection
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding-top: 60px; /* Prevent content hiding under the sticky header */
+         body {
             font-family: 'Poppins', sans-serif;
         }
-
-        nav {
+        .goffee-nav {
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -37,7 +33,7 @@ include("connect.php"); // Include database connection
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visual effect */
         }
 
-        nav .logo a {
+        .goffee-nav .logo a {
             display: flex;
             align-items: center;
             text-decoration: none;
@@ -46,41 +42,41 @@ include("connect.php"); // Include database connection
             color: rgb(197, 108, 19);
         }
 
-        nav .logo img {
+        .goffee-nav .logo img {
             margin-right: 10px;
             width: 40px;
             height: 40px;
         }
 
-        nav ul {
+        .goffee-nav ul {
             list-style: none;
             display: flex;
             margin: 0;
             padding: 0;
         }
 
-        nav ul li {
+        .goffee-nav ul li {
             margin-left: 20px;
         }
 
-        nav ul li a {
+        .goffee-nav ul li a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
         }
 
-        nav ul li a:hover {
+        .goffee-nav ul li a:hover {
             color: #c6a686;
         }
 
         /* Hamburger Menu Styles */
-        .hamburger {
+        .goffee-nav .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
         }
 
-        .hamburger span {
+        .goffee-nav .hamburger span {
             background-color: #333;
             height: 3px;
             width: 25px;
@@ -89,11 +85,11 @@ include("connect.php"); // Include database connection
 
         /* Responsive Menu */
         @media (max-width: 768px) {
-            .hamburger {
+            .goffee-nav .hamburger {
                 display: flex;
             }
 
-            nav ul {
+            .goffee-nav ul {
                 display: none;
                 flex-direction: column;
                 position: absolute;
@@ -105,11 +101,11 @@ include("connect.php"); // Include database connection
                 padding: 10px 0;
             }
 
-            nav ul.active {
+            .goffee-nav ul.active {
                 display: flex;
             }
 
-            nav ul li {
+            .goffee-nav ul li {
                 margin: 10px 0;
             }
         }
@@ -118,7 +114,7 @@ include("connect.php"); // Include database connection
 <body>
 
     <!-- Navigation Section -->
-    <nav>
+    <nav class="goffee-nav">
         <div class="logo">
             <a href="#">
                 <img src="images/cafe logo.png" alt="Cafe Logo">
