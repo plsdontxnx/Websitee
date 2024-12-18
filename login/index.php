@@ -21,7 +21,7 @@ include("header.php");
 <section class="container" id="home">
   <!-- Text Section -->
   <div class="text-section">
-    <h1><span class="highlight"> GOffe</span></h1>
+    <h1><span class="highlight"> GOffee</span></h1>
     <p>
       Elevating your cravings with every order. Discover the perfect mix of flavor, 
       convenience, and delight, delivered straight to you for an unforgettable experience!

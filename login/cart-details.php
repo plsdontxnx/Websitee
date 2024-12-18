@@ -22,6 +22,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET["id"]))
         }
     }
 }
+include("header.php");
 ?>
 
 <!doctype html>
@@ -31,53 +32,76 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET["id"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="landingpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Titillium+Web');
-        * { font-family: 'Titillium Web', sans-serif; }
-        table, th, td { text-align: center; }
-        .title2, h2 { text-align: center; color: #66afe9; background-color: #efefef; padding: 20px; }
-        table th { background-color: #efefef; }
-        .btn-success { margin-top: 5px; }
+        body {
+            font-family: 'Poppins', sans-serif;        
+            background-color: rgb(185, 149, 95);
+        }
+table, th, td {
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.title2, h2 {
+    text-align: center;
+    color: #66afe9;
+    background-color: #efefef;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 24px;
+}
+
+table th {
+    background-color: #efefef;
+    padding: 15px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 16px;
+}
+
+table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: #333;
+    font-size: 14px;
+}
+
+table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.btn-success {
+    margin-top: 5px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
     </style>
 </head>
 <body>
-<nav>
-    <!-- Left Side Navigation -->
-    <div class="left-nav">
-      <ul>
-        <li><a href="index.php" class="nav-link active" id="homeLink">Home</a></li>
-        <li><a href="#menu" class="nav-link" id="menuLink">Menu</a></li>
-      </ul>
-    </div>
-
-    <!-- Logo Section -->
-    <div class="logo">
-      <a href="#">
-        <img src="images/cafe logo.png" alt="Cafe Logo">
-        <span><span class="go">GO</span><span class="fee">ffee</span></span>
-      </a>
-    </div>
-
-    <!-- Right Side Navigation -->
-    <div class="right-nav">
-      <ul>
-        <li><a href="#about" class="nav-link" id="aboutLink">About Us</a></li>
-        <li><a href="#contact" class="nav-link" id="contactLink">Contact</a></li>
-        <li>
-          <a href="product-details.php">
-            <img src="images/shopping-cart.png" alt="Shopping Cart">
-          </a>
-        </li>
-        <?php if (isset($_SESSION['email']) && isset($_SESSION['fName'])): ?>
-          <li><a href="#">Hello, <?php echo htmlspecialchars($_SESSION['fName']); ?>!</a></li>
-          <li><a href="logout.php">Logout</a></li>
-        <?php else: ?>
-          <li><a href="login.php">Sign In</a></li>
-        <?php endif; ?>
-      </ul>
-    </div>
-</nav>
 
 <div class="container" style="width: 65%">
     <h2>Shopping Cart</h2>
@@ -105,7 +129,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET["id"]))
             </tr>
             <?php } ?>
             <tr>
-                <td colspan="3" align="right">Total</td>
+                <td colspan="3" text-align="right">Total</td>
                 <td colspan="2">$<?php echo number_format($total, 2); ?></td>
             </tr>
         </table>

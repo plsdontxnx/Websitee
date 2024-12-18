@@ -116,7 +116,7 @@ include("connect.php"); // Include database connection
     <!-- Navigation Section -->
     <nav class="goffee-nav">
         <div class="logo">
-            <a href="#">
+            <a href="index.php">
                 <img src="images/cafe logo.png" alt="Cafe Logo">
                 <span><span class="go">GO</span><span class="fee">ffee</span></span>
             </a>
@@ -131,10 +131,10 @@ include("connect.php"); // Include database connection
 
         <!-- Navigation Links -->
         <ul id="nav-links">
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#menu" class="nav-link">Menu</a></li>
-            <li><a href="#about" class="nav-link">About Us</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="index.php#home" class="nav-link">Home</a></li>
+            <li><a href="index.php#menu" class="nav-link">Menu</a></li>
+            <li><a href="index.php#about" class="nav-link">About Us</a></li>
+            <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             <li>
                 <a href="product-details.php">
                     <img src="images/shopping-cart.png" alt="Shopping Cart" style="width: 20px;">

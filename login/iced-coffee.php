@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("connect.php"); // Import database connection
-include("header.php"); 
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['email'])) {
@@ -56,6 +55,7 @@ if (isset($_POST["add"])) {
     echo '<script>alert("'.$_SESSION["message"].'"); window.location="iced-coffee.php";</script>';
     unset($_SESSION["message"]); // Clear the message after displaying
 }
+include("header.php"); 
 ?>
 
 <!doctype html>
@@ -217,7 +217,7 @@ if (isset($_POST["add"])) {
                                 <img src="images/<?php echo $row["image"]; ?>" alt="<?php echo $row["name"]; ?>">
                                 <h5 class="text-info"><?php echo $row["name"]; ?></h5>
                                 <p><?php echo $row["description"]; ?></p>
-                                <h5 class="text-danger">₱<?php echo $row["price"]; ?></h5>
+                                <h5 class="text-danger">$<?php echo $row["price"]; ?></h5>
                                 <input type="number" name="quantity" class="form-control" value="1" min="1">
                                 <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
                             </div>

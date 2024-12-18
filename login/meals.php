@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("connect.php");
-include("header.php");
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['email'])) {
@@ -51,6 +50,7 @@ if (isset($_POST["add"])) {
     echo '<script>alert("'.$_SESSION["message"].'"); window.location="meals.php";</script>';
     unset($_SESSION["message"]); // Clear the message after displaying
 }
+include("header.php");
 ?>
 
 <!doctype html>
@@ -73,14 +73,6 @@ if (isset($_POST["add"])) {
             box-sizing: border-box;
         }
 
-        nav {
-            background-color: #ffffff;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
 
         .header {
             text-align: center;
@@ -214,7 +206,7 @@ if (isset($_POST["add"])) {
                             <img src="images/<?php echo $row["image"]; ?>" alt="<?php echo $row["name"]; ?>">
                             <h5 class="text-info"><?php echo $row["name"]; ?></h5>
                             <p><?php echo $row["description"]; ?></p>
-                            <h5 class="text-danger">₱<?php echo $row["price"]; ?></h5>
+                            <h5 class="text-danger">$<?php echo $row["price"]; ?></h5>
                             <input type="number" name="quantity" class="form-control" value="1" min="1">
                             <input type="submit" name="add" class="btn btn-success" value="Add to Cart">
                         </div>

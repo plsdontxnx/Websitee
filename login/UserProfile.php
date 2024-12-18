@@ -1,15 +1,21 @@
+<?php
+session_start(); // Start session
+include("connect.php"); // Include database connection
+include("header.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="landingpage.css">
     <style>
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Poppins', sans-serif;
         }
     </style>
@@ -29,7 +35,13 @@
                 editButton.textContent = "Save";
             } else {
                 editButton.textContent = "Edit";
-                // Optional: Submit the form to save changes when the button becomes "Save"
+
+                // Enable fields temporarily for form submission
+                for (var i = 0; i < fields.length; i++) {
+                    fields[i].disabled = false;
+                }
+
+                // Submit the form
                 document.getElementById('profileForm').submit();
             }
         }
@@ -37,23 +49,21 @@
 </head>
 <body>  
     <?php
-        session_start();
-        $conn = new mysqli('localhost', 'root', '', 'login');
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
 
         // Default user data
-        $user = ['fname' => '', 'lname' => '', 'email' => '', 'mobile' => '', 'password' => ''];
+        $user = ['fName' => '', 'lName' => '', 'email' => '', 'mobile' => '', 'password' => ''];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['updateProfile'])) {
+        $successMessage = ""; // Initialize success message
+
+        // Process form submission
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fname = $conn->real_escape_string($_POST['fname']);
             $lname = $conn->real_escape_string($_POST['lname']);
             $email = $conn->real_escape_string($_POST['email']);
             $mobile = $conn->real_escape_string($_POST['mobile']);
             $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
 
-            $updateQuery = "UPDATE users SET fname='$fname', lname='$lname', email='$email', mobile='$mobile'";
+            $updateQuery = "UPDATE users SET fName='$fname', lName='$lname', email='$email', mobile='$mobile'";
             if ($password) {
                 $updateQuery .= ", password='$password'";
             }
@@ -64,14 +74,15 @@
                 $_SESSION['lName'] = $lname;
                 $_SESSION['email'] = $email;
                 $_SESSION['mobile'] = $mobile;
+                $successMessage = "Profile updated successfully."; // Set success message
             } else {
-                echo "Error updating profile: " . $conn->error;
+                echo "<p style='color: red;'>Error updating profile: " . $conn->error . "</p>";
             }
         }
 
         if (isset($_SESSION['email'])) {
             $email = $conn->real_escape_string($_SESSION['email']);
-            $userQuery = "SELECT * FROM users WHERE email='$email'"; // Correct table name
+            $userQuery = "SELECT * FROM users WHERE email='$email'"; // Corrected query
             $userResult = $conn->query($userQuery);
             if ($userResult && $userResult->num_rows > 0) {
                 $user = $userResult->fetch_assoc();
@@ -83,56 +94,17 @@
         }
     ?>
     
-
-    <!-- Navigation Header -->
-    <nav class="navbar">
-        <!-- Left Side Navigation -->
-        <div class="left-nav">
-            <ul>
-                <li><a href="#home" class="nav-link active" id="HomeLink">Home</a></li>
-                <li><a href="#menu" class="nav-link" id="MenuLink">Menu</a></li>
-            </ul>
-        </div>
-
-        <!-- Logo Section -->
-        <div class="logo">
-            <a href="#">
-                <img src="images/cafe logo.png" alt="Cafe Logo">
-                <span><span class="go">GO</span><span class="fee">ffee</span></span>
-            </a>
-        </div>
-
-        <!-- Right Side Navigation -->
-        <div class="right-nav">
-            <ul>
-                <li><a href="#about" class="nav-link" id="aboutLink">About Us</a></li>
-                <li><a href="#contact" class="nav-link" id="contactLink">Contact</a></li>
-                <li>
-                    <a href="#">
-                        <img src="images/shopping-cart.png" alt="Shopping Cart">
-                    </a>
-                </li>
-                <?php if (isset($_SESSION['email']) && isset($_SESSION['fName'])): ?>
-                    <li><span class="nav-link">Hello, <?php echo htmlspecialchars($_SESSION['fName']); ?>!</span></li>
-                    <li><a href="logout.php" class="nav-link">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="index.php" class="nav-link">Sign In</a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Profile Edit Section -->
     <div class="container mt-5">
         <h2>Profile Information</h2>
         <form id="profileForm" method="POST" action="">
             <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" class="form-control editable-field" name="fname" id="fname" value="<?php echo htmlspecialchars($user['fname']); ?>" disabled>
+                <input type="text" class="form-control editable-field" name="fname" id="fname" value="<?php echo htmlspecialchars($user['fName']); ?>" disabled>
             </div>
             <div class="form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" class="form-control editable-field" name="lname" id="lname" value="<?php echo htmlspecialchars($user['lname']); ?>" disabled>
+                <input type="text" class="form-control editable-field" name="lname" id="lname" value="<?php echo htmlspecialchars($user['lName']); ?>" disabled>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -146,7 +118,12 @@
                 <label for="password">New Password</label>
                 <input type="password" class="form-control editable-field" name="password" id="password" placeholder="Leave blank to keep current password" disabled>
             </div>
-            <button type="button" id="editButton" class="btn btn-primary" onclick="toggleEdit()">Edit</button>
+            <div class="d-flex align-items-center">
+                <button type="button" id="editButton" class="btn btn-primary" onclick="toggleEdit()">Edit</button>
+                <?php if (!empty($successMessage)): ?>
+                    <span style="color: green; margin-left: 15px;"> <?php echo $successMessage; ?> </span>
+                <?php endif; ?>
+            </div>
         </form>
     </div>
 </body>
