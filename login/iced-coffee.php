@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("connect.php"); // Import database connection
+include("header.php"); 
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['email'])) {
@@ -63,27 +64,20 @@ if (isset($_POST["add"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iced Coffee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Poppins&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;        
             background-color: rgb(185, 149, 95);
-            margin: 0;
-            padding: 0;
         }
 
         * {
             box-sizing: border-box; /* Ensures consistent box-sizing */
         }
 
-        nav {
-            background-color: #ffffff;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
 
         .header {
             text-align: center;

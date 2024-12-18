@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("connect.php"); // Use the same database connection as before
+include("connect.php");
+include("header.php");
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['email'])) {
@@ -58,14 +59,14 @@ if (isset($_POST["add"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Poppins&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="landingpage.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;        
             background-color: rgb(185, 149, 95);
-            margin: 0;
-            padding: 0;
         }
 
         * {
@@ -188,40 +189,6 @@ if (isset($_POST["add"])) {
     </style>
 </head>
 <body>
-<nav>
-    <div class="left-nav">
-        <ul>
-            <li><a href="index.php" class="nav-link active" id="homeLink">Home</a></li>
-            <li><a href="index.php#menu" class="nav-link" id="menuLink">Menu</a></li>
-        </ul>
-    </div>
-
-    <div class="logo">
-        <a href="#">
-            <img src="images/cafe logo.png" alt="Cafe Logo">
-            <span><span class="go">GO</span><span class="fee">ffee</span></span>
-        </a>
-    </div>
-
-    <div class="right-nav">
-        <ul>
-            <li><a href="index.php#about" class="nav-link" id="aboutLink">About Us</a></li>
-            <li><a href="index.php#contact" class="nav-link" id="contactLink">Contact</a></li>
-            <li>
-                <a href="product-details.php">
-                    <img src="images/shopping-cart.png" alt="Shopping Cart">
-                </a>
-            </li>
-            <?php if (isset($_SESSION['email']) && isset($_SESSION['fName'])): ?>
-                <li><a href="#">Hello, <?php echo htmlspecialchars($_SESSION['fName']); ?>!</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            <?php else: ?>
-                <li><a href="login.php">Sign In</a></li>
-            <?php endif; ?>
-        </ul>
-    </div>
-</nav>
-
 <div class="header">
     <h1>Meals</h1>
 </div>
