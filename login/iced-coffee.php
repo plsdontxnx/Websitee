@@ -64,7 +64,6 @@ if (isset($_POST["add"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iced Coffee</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="landingpage.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -193,42 +192,6 @@ if (isset($_POST["add"])) {
     </style>
 </head>
 <body>
-<nav>
-    <!-- Left Side Navigation -->
-    <div class="left-nav">
-      <ul>
-        <li><a href="index.php" class="nav-link active" id="homeLink">Home</a></li>
-        <li><a href="index.php#menu" class="nav-link" id="menuLink">Menu</a></li>
-      </ul>
-    </div>
-
-    <!-- Logo Section -->
-    <div class="logo">
-      <a href="#">
-        <img src="images/cafe logo.png" alt="Cafe Logo">
-        <span><span class="go">GO</span><span class="fee">ffee</span></span>
-      </a>
-    </div>
-
-    <!-- Right Side Navigation -->
-    <div class="right-nav">
-      <ul>
-        <li><a href="index.php#about" class="nav-link" id="aboutLink">About Us</a></li>
-        <li><a href="index.php#contact" class="nav-link" id="contactLink">Contact</a></li>
-        <li>
-          <a href="product-details.php">
-            <img src="images/shopping-cart.png" alt="Shopping Cart">
-          </a>
-        </li>
-        <?php if (isset($_SESSION['email']) && isset($_SESSION['fName'])): ?>
-          <li><a href="#">Hello, <?php echo htmlspecialchars($_SESSION['fName']); ?>!</a></li>
-          <li><a href="logout.php">Logout</a></li>
-        <?php else: ?>
-          <li><a href="login.php">Sign In</a></li>
-        <?php endif; ?>
-      </ul>
-    </div>
-</nav>
 
     <div class="header">
         <h1>Iced Coffee</h1>
