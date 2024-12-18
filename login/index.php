@@ -136,7 +136,7 @@ include("header.php");
   }
 
   .carousel-image {
-    width: 100%;
+    width: 10 0%;
     height: auto;
     object-fit: cover;
     border-radius: 10px;
@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     .flavor-item img {
-      max-width: 50%;
+      max-width: 70%;
       height: auto;
       margin-bottom: 10px;
       border-radius: 5px; /* Rounded corners for images */
