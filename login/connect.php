@@ -1,9 +1,9 @@
 <?php
 
-$host="localhost";
+/*$host="localhost";
 $user="root";
 $pass="";
-$db="login";
+$db="login";*/
 
 /*$host="localhost";
 $user="u143688490_lou";
