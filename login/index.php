@@ -14,6 +14,7 @@ include("header.php");
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Angkor&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -21,7 +22,7 @@ include("header.php");
 <section class="container" id="home">
   <!-- Text Section -->
   <div class="text-section">
-    <h1><span class="highlight"> GOffe</span></h1>
+    <h1><span class="highlight">GOffe</span></h1>
     <p>
       Elevating your cravings with every order. Discover the perfect mix of flavor, 
       convenience, and delight, delivered straight to you for an unforgettable experience!
@@ -29,16 +30,33 @@ include("header.php");
     <button class="order-btn">Order Now</button>
   </div>
 
-  <!-- Image Carousel Section -->
-  <div class="carousel-section">
-    <div class="carousel">
-      <img src="images/matcha.jpg" alt="Matcha Coffee" class="carousel-image">
-      <img src="images/sample.jpg" alt="Sample Coffee" class="carousel-image">
-      <img src="images/shopPic.jpg" alt="Shop Picture" class="carousel-image">
-      <img src="images/frontpic.jpg" alt="Front Picture" class="carousel-image">
+  <!-- Carousel Section (using Bootstrap carousel) -->
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/matcha.jpg" class="d-block w-100" alt="Matcha Coffee">
+      </div>
+      <div class="carousel-item">
+        <img src="images/sample.jpg" class="d-block w-100" alt="Sample Coffee">
+      </div>
+      <div class="carousel-item">
+        <img src="images/shopPic.jpg" class="d-block w-100" alt="Shop Picture">
+      </div>
+      <div class="carousel-item">
+        <img src="images/frontpic.jpg" class="d-block w-100" alt="Front Picture">
+      </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </section>
+
 
 <style>
   /* General Styles */
@@ -106,6 +124,7 @@ include("header.php");
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: relative;
   }
 
   .carousel {
@@ -122,10 +141,56 @@ include("header.php");
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    display: none; /* Hide images by default */
+  }
+
+  .carousel-image.active {
+    display: block; /* Show the active image */
   }
 
   .carousel-image:hover {
     transform: scale(1.05);
+  }
+
+  /* Carousel Navigation Arrows */
+  .carousel-prev,
+  .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Left Arrow (Previous) */
+  .carousel-prev {
+    left: 10px;
+  }
+
+  .carousel-prev::before {
+    content: '←'; /* Left arrow */
+    font-size: 30px;
+  }
+
+  /* Right Arrow (Next) */
+  .carousel-next {
+    right: 10px;
+  }
+
+  .carousel-next::before {
+    content: '→'; /* Right arrow */
+    font-size: 30px;
+  }
+
+  .carousel-prev:hover,
+  .carousel-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
   /* Responsive Design */
@@ -153,24 +218,44 @@ include("header.php");
   }
 </style>
 
+
 <script>
-  // Simple Carousel Logic
-  let currentIndex = 0;
-  const images = document.querySelectorAll(".carousel-image");
+document.addEventListener("DOMContentLoaded", function () {
+    const carouselImages = document.querySelectorAll('.carousel-image');
+    const nextButton = document.querySelector('.carousel-next');
+    const prevButton = document.querySelector('.carousel-prev');
+    let currentIndex = 0;
 
-  setInterval(() => {
-    images.forEach((img, index) => {
-      img.style.display = index === currentIndex ? "block" : "none";
-    });
-    currentIndex = (currentIndex + 1) % images.length;
-  }, 3000);
+    function showImage(index) {
+        carouselImages.forEach((image, i) => {
+            image.classList.remove('active'); // Hide all images
+            if (i === index) {
+                image.classList.add('active'); // Show the current image
+            }
+        });
+    }
 
-  // Show the first image on load
-  document.addEventListener("DOMContentLoaded", () => {
-    images.forEach((img, index) => {
-      img.style.display = index === 0 ? "block" : "none";
-    });
-  });
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % carouselImages.length; // Loop to the first image
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length; // Loop to the last image
+        showImage(currentIndex);
+    }
+
+    // Set the first image as active
+    showImage(currentIndex);
+
+    // Add event listeners for the next and previous buttons
+    nextButton.addEventListener('click', nextImage);
+    prevButton.addEventListener('click', prevImage);
+
+    // Automatic carousel (optional)
+    setInterval(nextImage, 3000); // Change image every 3 seconds
+});
+
 </script>
 
 
@@ -220,7 +305,7 @@ include("header.php");
     }
 
     .flavor-item img {
-      max-width: 100%;
+      max-width: 50%;
       height: auto;
       margin-bottom: 10px;
       border-radius: 5px; /* Rounded corners for images */
@@ -258,47 +343,48 @@ include("header.php");
     }
   </style>
 
-  <div class="flavors-section">
+<div class="flavors-section">
     <h2>Explore Our Flavors</h2>
     <div class="flavors-container">
-      <!-- Iced Coffee -->
-      <div class="flavor-item">
-        <a href="iced-coffee.php" target="_blank">
-          <img src="images/iced coffe.png" alt="Iced Coffee" class="center-iced">
-        </a>
-        <p>Iced Coffee</p>
-      </div>
+        <!-- Iced Coffee -->
+        <div class="flavor-item">
+            <a href="iced-coffee.php">
+                <img src="images/iced coffe.png" alt="Iced Coffee" class="center-iced">
+            </a>
+            <p>Iced Coffee</p>
+        </div>
 
-      <!-- Meals -->
-      <div class="flavor-item middle-box">
-        <a href="meals.php" target="_blank">
-          <img src="images/pasta.png" alt="Meals" class="center-pasta">
-        </a>
-        <p>Meals</p>
-      </div>
+        <!-- Meals -->
+        <div class="flavor-item middle-box">
+            <a href="meals.php">
+                <img src="images/pasta.png" alt="Meals" class="center-pasta">
+            </a>
+            <p>Meals</p>
+        </div>
 
-      <!-- Non-Coffee -->
-      <div class="flavor-item third-box">
-        <a href="non-coffee.php" target="_blank">
-          <img src="images/matcha.webp" alt="Non-Coffee">
-        </a>
-        <p>Non-Coffee</p>
-      </div>
+        <!-- Non-Coffee -->
+        <div class="flavor-item third-box">
+            <a href="non-coffee.php">
+                <img src="images/matcha.webp" alt="Non-Coffee">
+            </a>
+            <p>Non-Coffee</p>
+        </div>
     </div>
-  </div>
+</div>
 </section>
 
 
     <!-- About Us Section -->
-    <section id="about" class="about-us" style="background-color: #f9f1e8; padding: 40px 20px; text-align: center;">
-        <h2 style="color: #d58c45; font-size: 2rem; margin-bottom: 20px;">About Us</h2>
-        <p style="color: #333; font-size: 1rem; max-width: 800px; margin: 0 auto;">
-            At GOffe, we value the art of crafting the perfect cup of coffee and offering delightful meals. 
-            Every bean and ingredient is hand-selected to ensure quality and freshness. 
-            Our team is committed to sustainability and community growth by sourcing locally 
-            and maintaining a positive experience for every customer.
-        </p>
-    </section>
+    <section id="about" class="about-us" style="background-color: #f9f1e8; padding: 40px 20px; text-align: center; border-top: 2px solid #d58c45;">
+    <h2 style="color: #d58c45; font-size: 2rem; margin-bottom: 20px;">About Us</h2>
+    <p style="color: #333; font-size: 1rem; max-width: 800px; margin: 0 auto;">
+        At GOffe, we value the art of crafting the perfect cup of coffee and offering delightful meals. 
+        Every bean and ingredient is hand-selected to ensure quality and freshness. 
+        Our team is committed to sustainability and community growth by sourcing locally 
+        and maintaining a positive experience for every customer.
+    </p>
+</section>
+
 
     <!-- Contact Us Section -->
     <section id="contact" class="contact-us" style="background-color: #fff; padding: 40px 20px; text-align: center; border-top: 2px solid #d58c45;">
@@ -333,7 +419,7 @@ include("header.php");
 
     <!-- Footer Section -->
     <footer style="background-color: #f9f1e8; padding: 20px 0; text-align: center; font-size: 0.9rem; color: #333;">
-        <p>© GOffe</p>
+        <p>Â© GOffe</p>
         <p style="margin-top: 10px;">Disclaimer: This website and its content are part of a school project and for educational purposes only.</p>
     </footer>
 
@@ -367,12 +453,13 @@ include("header.php");
                 if (loggedIn) {
                     document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
                 } else {
-                    window.location.href = "login.php";
+                    window.location.assign = "login.php";
                 }
             });
         });
     </script>
-
+  <!-- Include Bootstrap JS (make sure to include Bootstrap JS in your project) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
