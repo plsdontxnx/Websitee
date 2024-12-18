@@ -30,7 +30,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete" && isset($_GET["id"]))
     <style>
         body {
             font-family: 'Poppins', sans-serif;        
-            background-color: rgb(185, 149, 95);
+            background-color: rgb(245, 234, 223);
         }
       
         table, th, td {

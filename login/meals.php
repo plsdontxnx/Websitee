@@ -66,7 +66,7 @@ include("header.php");
     <style>
         body {
             font-family: 'Poppins', sans-serif;        
-            background-color: rgb(185, 149, 95);
+            background-color: rgb(245, 234, 223);
         }
 
         * {
