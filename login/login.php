@@ -86,26 +86,6 @@ include("connect.php");?>
             <p>Don't have account yet?</p>
             <button id="signUpButton">Sign Up</button>
         </div>
-
-        <!-- Small admin dashboard button -->
-        <button id="adminDashboardButton"
-            class="btn" 
-            style="
-                background-color: #007BFF; 
-                color: white; 
-                border: none; 
-                padding: 5px 10px; 
-                cursor: pointer; 
-                border-radius: 50%; 
-                width: 40px; 
-                height: 40px; 
-                text-align: center; 
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" 
-            onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.15)';" 
-            onmouseout="this.style.backgroundColor='#007BFF'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.1)';" 
-            onclick="window.location.href='admin-login.php';">
-            <i class="fas fa-user-cog"></i>
-        </button>
     </div>
 
     <script src="script.js"></script>

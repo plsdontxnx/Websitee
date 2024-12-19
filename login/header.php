@@ -18,9 +18,10 @@ include("connect.php"); // Include database connection
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-         body {
+        body {
             font-family: 'Poppins', sans-serif;
         }
+
         .goffee-nav {
             position: sticky;
             top: 0;
@@ -31,6 +32,7 @@ include("connect.php"); // Include database connection
             align-items: center;
             padding: 10px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visual effect */
+            transition: padding 0.3s ease;
         }
 
         .goffee-nav .logo a {
@@ -99,10 +101,14 @@ include("connect.php"); // Include database connection
                 width: 100%;
                 text-align: center;
                 padding: 10px 0;
+                transition: max-height 0.3s ease;
+                max-height: 0;
+                overflow: hidden; /* Ensure hidden items when not active */
             }
 
             .goffee-nav ul.active {
                 display: flex;
+                max-height: 500px; /* Or any suitable height */
             }
 
             .goffee-nav ul li {
@@ -149,13 +155,24 @@ include("connect.php"); // Include database connection
         </ul>
     </nav>
 
-    <!-- JavaScript for Hamburger Toggle -->
+    <!-- JavaScript for Hamburger Toggle and Auto-Close on Link Click -->
     <script>
         const hamburger = document.getElementById("hamburger");
         const navLinks = document.getElementById("nav-links");
+        const navItems = document.querySelectorAll(".nav-link");
 
+        // Toggle menu when hamburger is clicked
         hamburger.addEventListener("click", () => {
             navLinks.classList.toggle("active");
+        });
+
+        // Close the menu when a navigation link is clicked
+        navItems.forEach(item => {
+            item.addEventListener("click", () => {
+                if (navLinks.classList.contains("active")) {
+                    navLinks.classList.remove("active");
+                }
+            });
         });
     </script>
 

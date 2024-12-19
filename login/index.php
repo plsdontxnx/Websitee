@@ -27,7 +27,7 @@ include("header.php");
       Elevating your cravings with every order. Discover the perfect mix of flavor, 
       convenience, and delight, delivered straight to you for an unforgettable experience!
     </p>
-    <button class="order-btn">Order Now</button>
+    <button class="order-btn" id="orderButton">Order Now</button>
   </div>
 
   <!-- Carousel Section (using Bootstrap carousel) -->
@@ -217,6 +217,16 @@ include("header.php");
     }
   }
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const orderButton = document.getElementById("orderButton");
+
+    orderButton.addEventListener("click", function () {
+        // Redirect to menu.php
+        <li><a href="#menu" class="nav-link">Menu</a></li> // Replace "menu.php" with the actual menu page if needed
+    });
+});
+</script>
 
 
 <script>
@@ -258,6 +268,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const orderButton = document.getElementById("orderButton");
+
+    orderButton.addEventListener("click", function () {
+        // Scroll to the menu section smoothly
+        const menuSection = document.getElementById("menu");
+        menuSection.scrollIntoView({ behavior: "smooth" });
+    });
+});
+</script>
 
 
 <section class="section-two" id="menu">
